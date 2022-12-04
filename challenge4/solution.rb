@@ -21,19 +21,11 @@ def count_containments(assignments, containment_type)
 end
 
 def contains(assignment1, assignment2)
-  if assignment1[0].to_i <= assignment2[0].to_i && assignment1[1].to_i >= assignment2[1].to_i
-    1
-  else
-    0
-  end
+  assignment1[0].to_i <= assignment2[0].to_i && assignment1[1].to_i >= assignment2[1].to_i ? 1 : 0
 end
 
 def overlaps(assignment1, assignment2)
-  if assignment1[0].to_i <= assignment2[0].to_i && assignment1[1].to_i >= assignment2[0].to_i
-    1
-  else
-    0
-  end
+  assignment1[0].to_i <= assignment2[0].to_i && assignment1[1].to_i >= assignment2[0].to_i ? 1 : 0
 end
 
 puts "solution 1: #{count_containments(parse_file, :completely_contains)}"
