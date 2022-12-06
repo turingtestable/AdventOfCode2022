@@ -2,19 +2,16 @@ def parse_file
   @parse_file ||= File.open('input.txt').readlines.map(&:chomp)[0]
 end
 
-def detect_starting_code(line)
+def detect_starting_code(line, size)
   (0..line.length-3).each do |n|
-    return n + 3 + 1 unless any_pairs?(line, n)
+    return n + size unless any_pairs?(line, n, size)
   end
 end
 
-def any_pairs?(line, n)
-  line[n] == line[n + 1] ||
-    line[n] == line[n + 2] ||
-    line[n] == line[n + 3] ||
-    line[n + 1] == line[n + 2] ||
-    line[n + 1] == line[n + 3] ||
-    line[n + 2] == line[n + 3]
+def any_pairs?(line, n, size)
+  potential_message = line[n..n + size - 1]
+  potential_message.length != potential_message.split('').uniq.length
 end
 
-puts "solution 1: #{detect_starting_code(parse_file)}"
+puts "solution 1: #{detect_starting_code(parse_file, 4)}"
+puts "solution 2: #{detect_starting_code(parse_file, 14)}"
